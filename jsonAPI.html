@@ -1,0 +1,56 @@
+<html>
+<head>
+<title>json & APIs</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<script>
+	
+	$(document).ready(function(){
+	let users=[]
+		axios.get("https://jsonplaceholder.typicode.com/users")
+		.then(response =>{
+			users=response.data
+			for(var i=0; i<users.length; i++)
+			{
+			<!-- $(".users").append("<p>"+users[i].name+"</p>") -->
+			<!-- $(".users").append(`<p> ${users[i].email}</p>`) -->
+			<!-- $(".users").append(`<p> ${users[i].username}</p>`) -->
+			<!-- $(".users").append(`<p> ${users[i].address.street}</p>`) -->
+			
+			$("#table-data").append(
+			`
+			<tr>
+				<td>${users[i].name}</td>
+				<td>${users[i].email}</td>
+				<td>${users[i].username}</td>
+				<td>${users[i].address.suite},${users[i].address.street},${users[i].address.city}</td>
+			</tr>
+			`
+			)
+			
+			}
+		})
+	})
+</script>
+</head>
+<body>
+<h1>Learning JSON & API</h1>
+	<div class="users"></div>
+	<table class="table">
+		<tr>
+			<th>name</th>
+			<th>email</th>
+			<th>username</th>
+			<th>address</th>
+		</tr>
+		<tbody id="table-data">
+		
+		</tbody>
+	</table>
+</body>
+</html>
